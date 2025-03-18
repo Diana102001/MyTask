@@ -1,6 +1,8 @@
 The code includes two spiders to solve Task30, spider1 doesn't inherit basespider,spider2 inherits basespider
+
 The path of the output of spider1 is: Task30/output_data/spider1_chapter_13.json
-The path of the output of spider1 is: The path of the output of spider1 is: Task30/output_data/spider1_chapter_13.json
+
+The path of the output of spider2 is: The path of the output of spider1 is: Task30/output_data/spider1_chapter_13.json
 #####
 The task:
 ### 📌 Task: Process PDF for South Carolina Code of Regulations - Chapter 13 Attorney General
