@@ -1,32 +1,29 @@
 from scrapy.loader import ItemLoader
-from itemloaders.processors import TakeFirst, MapCompose
+from itemloaders.processors import TakeFirst, MapCompose,Join
 from .items import SectionItem, SubArticleItem, ArticleItem, SrcaItem
 
-def clean_text(text):
-    return text.strip() if text else text
+from scrapy.loader import ItemLoader
+import re
 
-class SectionLoader(ItemLoader):
-    default_item_class = SectionItem
-    default_output_processor = TakeFirst()
-    num_in = MapCompose(str.strip)
-    title_in = MapCompose(clean_text)
-    content_in = MapCompose(str.strip)  # Or any other processing you want
+# def clean_text(text):
+#     return re.sub(r"\s+", " ", text).strip()
 
+# class ArticleLoader(ItemLoader):
+#     default_output_processor = TakeFirst()  # Take first value by default
+#     title_in = MapCompose(str.strip, clean_text)
+#     num_in = MapCompose(str.strip)
 
-class SubArticleLoader(ItemLoader):
-    default_item_class = SubArticleItem
-    default_output_processor = TakeFirst()
-    num_in = MapCompose(str.strip)
-    title_in = MapCompose(clean_text)
-    sections_in = MapCompose(SectionLoader.load_item)
+# class SubArticleLoader(ItemLoader):
+#     default_output_processor = TakeFirst()
+#     title_in = MapCompose(str.strip, clean_text)
+#     num_in = MapCompose(str.strip)
 
-class ArticleLoader(ItemLoader):
-    default_item_class = ArticleItem
-    default_output_processor = TakeFirst()
-    num_in = MapCompose(str.strip)
-    title_in = MapCompose(clean_text)
-    sections_in = MapCompose(SectionLoader.load_item)
-    subarticles_in = MapCompose(SubArticleLoader.load_item)
+# class SectionLoader(ItemLoader):
+#     default_output_processor = TakeFirst()
+#     title_in = MapCompose(str.strip, clean_text)
+#     num_in = MapCompose(str.strip)
+#     content_in = MapCompose(str.strip)
+#     content_out = Join(" ")  # Join multiple content lines into a single paragraph
 
 class SrcaItemLoader(ItemLoader):
     default_item_class = SrcaItem

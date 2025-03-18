@@ -364,7 +364,7 @@
                 "US"
             ],
             "doc_types": [
-                "Rulesets"
+                "Rule"
             ],
             "published": "2021-10-13",
             "url": "https://www.scstatehouse.gov/coderegs/Chapter%2013.pdf",
@@ -374,7 +374,7 @@
                 "information_types": null,
                 "policy_areas": null,
                 "company": null,
-                "regulation_area": null,
+                "regulation_area": "South Carolina",
                 "breach_area": null,
                 "closing_date": null,
                 "status": null,
@@ -389,30 +389,30 @@
             "files": [
                 {
                     "url": "https://www.scstatehouse.gov/coderegs/Chapter%2013.pdf",
-                    "path": "SCAG/Rulesets/json/Chapter%2013.json",
+                    "path": "SCAG/Rule/json/Chapter%2013.json",
                     "checksum": "8c885d963b9b1cfc750f4a0655167f28",
                     "status": "downloaded"
                 }
             ],
             "components": [
-                "[[POINT]]",
+                "[[PARAGRAPH]]",
+                "[[SUBARTICLE]]",
+                "[[HISTORY]]",
                 "[[SECTION]]",
-                "[[CHAPTER]]",
                 "[[CODE]]",
                 "[[ARTICLE]]",
-                "[[SUBARTICLE]]",
-                "[[PARAGRAPH]]",
-                "[[HISTORY]]"
+                "[[POINT]]",
+                "[[CHAPTER]]"
             ],
             "patterns": [
-                "[[POINT]]",
+                "[[PARAGRAPH]]",
+                "[[SUBARTICLE]]",
+                "[[HISTORY]]",
                 "[[SECTION]]",
-                "[[CHAPTER]]",
                 "[[CODE]]",
                 "[[ARTICLE]]",
-                "[[SUBARTICLE]]",
-                "[[PARAGRAPH]]",
-                "[[HISTORY]]"
+                "[[POINT]]",
+                "[[CHAPTER]]"
             ],
             "date_scraped": "2025-03-18",
             "s3_urls": [],

@@ -7,8 +7,8 @@ from ..items import SrcaItem
 from ..itemsLoaders import SrcaItemLoader
 import os, json, hashlib
 
-
-class newSpider(BaseSpiderV2):
+# this spider inherits the basespiderv2
+class Spider2(BaseSpiderV2):
     name = "scag"
     data_source = "SCAG"
     base_path = f"output_data/{name}/"
@@ -67,16 +67,16 @@ class newSpider(BaseSpiderV2):
                 {
                     'url': url,
                     'path': file_path,
-                    'checksum': checksum,  # Add checksum calculation if needed
+                    'checksum': checksum,  
                     'status': 'downloaded'
                 }
             ],
             'components': components,
-            'patterns': components,  # Assuming patterns match components
+            'patterns': components,  
             'date_scraped': scraping_date,
-            's3_urls': [],  # To be filled by pipeline
-            's3_pdf_urls': [],  # To be filled by pipeline
-            's3_key': None  # To be filled by pipeline
+            's3_urls': [],  
+            's3_pdf_urls': [], 
+            's3_key': None 
         }
 
         loader.add_value('meta_data', metadata)
@@ -104,6 +104,7 @@ class newSpider(BaseSpiderV2):
 
 
     def concatenate_until_end(self, strings):
+        # after processing each line separately, we need to identify the lines that are related to the same tag
         concatenated_strings = []
         i = 0
 
@@ -164,7 +165,9 @@ class newSpider(BaseSpiderV2):
         history_tag="[[HISTORY]]"
         code_tag="[[CODE]]"
         point_tag="[[POINT]]"
-        # Initialize variables
+        
+        
+
         results = []
         used_tags = set()  # Set to store unique tags that were used
         title = ''
@@ -172,7 +175,7 @@ class newSpider(BaseSpiderV2):
         chapter_pattern = re.compile(r"CHAPTER\s+(\d+)")
         article_pattern = re.compile(r"ARTICLE\s+(\d+)")
         subarticle_pattern = re.compile(r"SUBARTICLE\s+(\d+)\s*")
-        section_pattern = re.compile(r"^13–(\d+)\.\s+(.*)")
+        section_pattern = re.compile(r"^\d+–(\d+)\.\s+(.*)")
         history_pattern = re.compile(r"^HISTORY:")
         code_pattern = re.compile(r"^\(Statutory Authority: .* Code .*?\)$")
         point_pattern = re.compile(r"^[A-Z]\.[\s\S]+$")
@@ -185,7 +188,7 @@ class newSpider(BaseSpiderV2):
                 lines = text["lines"]
                 
                 for i, line in enumerate(lines):
-                    # Extract full line text without spans
+                    # Extract full line of text and then check if it matches any of the defined patterns
                     full_line_text = "".join(span["text"] for span in line["spans"]).replace("  ", " ").strip()          
                 
                     if  chapter_pattern.match(full_line_text):
@@ -214,6 +217,7 @@ class newSpider(BaseSpiderV2):
                         used_tags.add(paragraph_tag)
 
         clean_results = self.concatenate_until_end(results)
+        # get the title from the first line after the tag
         title=clean_results[0].split("]] ")[1]
         return clean_results, title, list(used_tags)  
 
